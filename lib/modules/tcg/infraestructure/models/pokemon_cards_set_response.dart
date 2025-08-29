@@ -1,84 +1,116 @@
 class PokemonCardsSetResponse {
+  final SetCardCountResponse cardCount;
+  final List<SetCardResponse> cards;
   final String id;
   final String name;
-  final String series;
-  final int printedTotal;
-  final int total;
-  final Legalities legalities;
-  final String ptcgoCode;
-  final String releaseDate;
-  final String updatedAt;
-  final SetImagesResponse images;
+  final SetSerieResponse? serie;
+  final SetLegalResponse? legal;
+  final String? logo;
+  final DateTime? releaseDate;
+  final String? symbol;
 
   PokemonCardsSetResponse({
+    required this.cardCount,
+    required this.cards,
     required this.id,
     required this.name,
-    required this.series,
-    required this.printedTotal,
-    required this.total,
-    required this.legalities,
-    required this.ptcgoCode,
-    required this.releaseDate,
-    required this.updatedAt,
-    required this.images,
+    this.serie,
+    this.legal,
+    this.releaseDate,
+    this.logo,
+    this.symbol,
   });
 
   factory PokemonCardsSetResponse.fromJson(Map<String, dynamic> json) =>
       PokemonCardsSetResponse(
         id: json["id"],
         name: json["name"],
-        series: json["series"],
-        printedTotal: json["printedTotal"],
-        total: json["total"],
-        legalities: Legalities.fromJson(json["legalities"]),
-        ptcgoCode: json["ptcgoCode"],
-        releaseDate: json["releaseDate"],
-        updatedAt: json["updatedAt"],
-        images: SetImagesResponse.fromJson(json["images"]),
+        cardCount: SetCardCountResponse.fromJson(json["cardCount"]),
+        cards: json["cards"] == null
+            ? []
+            : List<SetCardResponse>.from(
+                json["cards"].map((x) => SetCardResponse.fromJson(x)),
+              ),
+        logo: json["logo"],
+        symbol: json["symbol"],
+        legal: json["legal"] == null
+            ? null
+            : SetLegalResponse.fromJson(json["legal"]),
+        releaseDate: json["releaseDate"] == null
+            ? null
+            : DateTime.parse(json["releaseDate"]),
+        serie: json["serie"] == null
+            ? null
+            : SetSerieResponse.fromJson(json["serie"]),
       );
-
-  Map<String, dynamic> toJson() => {
-    "id": id,
-    "name": name,
-    "series": series,
-    "printedTotal": printedTotal,
-    "total": total,
-    "legalities": legalities.toJson(),
-    "ptcgoCode": ptcgoCode,
-    "releaseDate": releaseDate,
-    "updatedAt": updatedAt,
-    "images": images.toJson(),
-  };
 }
 
-class SetImagesResponse {
-  final String symbol;
-  final String logo;
+class SetCardCountResponse {
+  final int? firstEd;
+  final int? holo;
+  final int? normal;
+  final int? reverse;
+  final int official;
+  final int total;
 
-  SetImagesResponse({required this.symbol, required this.logo});
+  SetCardCountResponse({
+    this.firstEd,
+    this.holo,
+    this.normal,
+    this.reverse,
+    required this.official,
+    required this.total,
+  });
 
-  factory SetImagesResponse.fromJson(Map<String, dynamic> json) =>
-      SetImagesResponse(symbol: json["symbol"], logo: json["logo"]);
-
-  Map<String, dynamic> toJson() => {"symbol": symbol, "logo": logo};
+  factory SetCardCountResponse.fromJson(Map<String, dynamic> json) =>
+      SetCardCountResponse(
+        firstEd: json["firstEd"] == null ? null : json['firstEd'],
+        holo: json["holo"] == null ? null : json['holo'],
+        normal: json["normal"] == null ? null : json['normal'],
+        reverse: json["reverse"] == null ? null : json['reverse'],
+        official: json["official"] == null ? null : json['official'],
+        total: json["total"],
+      );
 }
 
-class Legalities {
-  final String? unlimited;
-  final String? standard;
-  final String? expanded;
+class SetCardResponse {
+  final String id;
+  final String image;
+  final String localId;
+  final String name;
 
-  Legalities({this.unlimited = "", this.standard = "", this.expanded = ""});
+  SetCardResponse({
+    required this.id,
+    required this.image,
+    required this.localId,
+    required this.name,
+  });
 
-  factory Legalities.fromJson(Map<String, dynamic> json) => Legalities(
-    unlimited: json["unlimited"] ? json["unlimited"] : "",
-    standard: json["standard"] ? json["standard"] : "",
-    expanded: json["expanded"] ? json["expanded"] : "",
-  );
+  factory SetCardResponse.fromJson(Map<String, dynamic> json) =>
+      SetCardResponse(
+        id: json["id"],
+        image: json["image"],
+        localId: json["localId"],
+        name: json["name"],
+      );
+}
 
-  Map<String, dynamic> toJson() => {
-    "unlimited": unlimited,
-    "standard": standard,
-    "expanded": expanded,
-  };
+class SetLegalResponse {
+  final bool expanded;
+  final bool standard;
+
+  SetLegalResponse({required this.expanded, required this.standard});
+
+  factory SetLegalResponse.fromJson(Map<String, dynamic> json) =>
+      SetLegalResponse(expanded: json["expanded"], standard: json["standard"]);
+}
+
+class SetSerieResponse {
+  final String id;
+  final String name;
+
+  SetSerieResponse({required this.id, required this.name});
+
+  factory SetSerieResponse.fromJson(Map<String, dynamic> json) =>
+      SetSerieResponse(id: json["id"], name: json["name"]);
 }

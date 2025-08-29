@@ -4,15 +4,38 @@ import 'package:pkm_tcg_app/modules/tcg/infraestructure/models/pokemon_cards_set
 class PokemonSetMapper {
   static PokemonCardsSet setToEntity(PokemonCardsSetResponse set) {
     return PokemonCardsSet(
+      cardCount: SetCardCount(
+        firstEd: set.cardCount.firstEd,
+        holo: set.cardCount.holo,
+        normal: set.cardCount.normal,
+        reverse: set.cardCount.reverse,
+        official: set.cardCount.official,
+        total: set.cardCount.total,
+      ),
+      cards: set.cards
+          .map(
+            (card) => SetCard(
+              id: card.id,
+              image: '${card.image}/low.png',
+              localId: card.localId,
+              name: card.name,
+            ),
+          )
+          .toList(),
       id: set.id,
       name: set.name,
-      series: set.series,
-      printedTotal: set.printedTotal,
-      total: set.total,
-      ptcgoCode: set.ptcgoCode,
+      serie: set.serie == null
+          ? null
+          : SetSerie(id: set.serie!.id, name: set.serie!.name),
+      legal: set.legal == null
+          ? null
+          : SetLegal(
+              expanded: set.legal!.expanded,
+              standard: set.legal!.standard,
+            ),
       releaseDate: set.releaseDate,
-      updatedAt: set.updatedAt,
-      images: ImagesSet(symbol: set.images.symbol, logo: set.images.logo),
+      logo: set.logo == null ? null : '${set.logo!}.png',
+      symbol: set.symbol == null ? null : '${set.symbol!}.png',
     );
   }
 }
