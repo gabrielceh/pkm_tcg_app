@@ -30,7 +30,7 @@ class CardDetailsScreenState extends ConsumerState<CardDetailsScreen> {
     }
 
     return Scaffold(
-      appBar: AppBar(title: Text('Detalles')),
+      appBar: AppBar(title: Text('Detalles: ${card.id}')),
       body: Stack(
         children: [
           Padding(

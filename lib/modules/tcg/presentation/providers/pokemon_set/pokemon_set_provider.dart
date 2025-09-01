@@ -41,7 +41,8 @@ class PokemonSetNotifier extends StateNotifier<PokemonSetState> {
     if (state.isLoading) return;
 
     state = state.copyWith(isLoading: true);
-    final set = await repository.getPokemonSetById(id);
+    // TODO: cambiar por el id
+    final set = await repository.getPokemonSetById("sv10");
 
     if (set.cards.isEmpty) {
       state = state.copyWith(isLoading: false, set: null);

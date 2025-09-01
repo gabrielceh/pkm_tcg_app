@@ -13,8 +13,12 @@ class PokemonCardMapper {
       set: CardSetDetails(
         id: pokemonCard.set.id,
         name: pokemonCard.set.name,
-        logo: pokemonCard.set.logo,
-        symbol: pokemonCard.set.symbol,
+        logo: pokemonCard.set.logo == null
+            ? null
+            : '${pokemonCard.set.logo}.png',
+        symbol: pokemonCard.set.symbol == null
+            ? null
+            : '${pokemonCard.set.symbol}.png',
         cardCount: CardSetCount(
           official: pokemonCard.set.cardCount?.official,
           total: pokemonCard.set.cardCount?.total,
@@ -22,8 +26,12 @@ class PokemonCardMapper {
       ),
       cardType: CardTypeMapper.map(pokemonCard.category),
       rarity: pokemonCard.rarity,
-      imageHighQuality: '${pokemonCard.image}/high.png',
-      imageLowQuality: '${pokemonCard.image}/low.png',
+      imageHighQuality: pokemonCard.image == null
+          ? null
+          : '${pokemonCard.image}/high.png',
+      imageLowQuality: pokemonCard.image == null
+          ? null
+          : '${pokemonCard.image}/low.png',
       types: pokemonCard.types
           ?.map((type) => ColorTypeCardMap.map(type))
           .toList(),

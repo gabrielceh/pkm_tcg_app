@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:pkm_tcg_app/modules/shared/presentation/widgets/widgets.dart';
 import 'package:pkm_tcg_app/modules/tcg/domain/domain.dart';
+import 'package:pkm_tcg_app/modules/tcg/presentation/widgets/card_screen/card_set_section.dart';
 import 'card_name_rarity.dart';
 
 class CardDraggableScroll extends StatelessWidget {
@@ -37,10 +38,16 @@ class CardDraggableScroll extends StatelessWidget {
                         horizontal: 12,
                       ),
                       child: Column(
+                        spacing: 12,
                         children: [
                           CardNameRarity(
                             cardName: card.name,
                             cardRarity: card.rarity ?? '',
+                          ),
+
+                          CardSetSection(
+                            cardSet: card.set,
+                            idInSet: card.idInSet,
                           ),
                         ],
                       ),
