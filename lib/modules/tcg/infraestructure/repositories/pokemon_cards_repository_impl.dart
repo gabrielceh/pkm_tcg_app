@@ -6,7 +6,7 @@ class PokemonCardsRepositoryImpl extends PokemonCardsRepository {
   PokemonCardsRepositoryImpl(this.datasource);
 
   @override
-  Future<List<PokemonCard>> getPokemonCardById(String id) {
+  Future<PokemonCard> getPokemonCardById(String id) {
     return datasource.getPokemonCardById(id);
   }
 }

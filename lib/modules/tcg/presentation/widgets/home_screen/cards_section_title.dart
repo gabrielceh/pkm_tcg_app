@@ -25,22 +25,33 @@ class CardsSectionTitle extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
-          spacing: 10,
+          spacing: 5,
           children: [
             const Text(
               "Ultimo set",
               style: TextStyle(fontSize: 18),
               textAlign: TextAlign.left,
             ),
-            Center(
-              child: logo == null
-                  ? Text(title, textAlign: TextAlign.center)
-                  : CustomImageNetworkErrorHandler(
-                      imageUrl: logo!,
-                      width: width,
-                      height: height,
-                    ),
-            ),
+
+            if (logo == null)
+              Expanded(
+                child: Center(
+                  child: Text(
+                    title,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ),
+            if (logo != null)
+              Center(
+                child: CustomImageNetworkErrorHandler(
+                  imageUrl: logo!,
+                  width: width,
+                  height: 90,
+                  fit: BoxFit.contain,
+                ),
+              ),
           ],
         ),
       ),

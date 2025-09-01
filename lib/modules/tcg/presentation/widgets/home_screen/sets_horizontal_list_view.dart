@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pkm_tcg_app/modules/tcg/domain/domain.dart';
-import 'package:pkm_tcg_app/modules/tcg/presentation/widgets/home_screen/custom_card_set.dart';
+import 'package:pkm_tcg_app/modules/tcg/presentation/widgets/home_screen/custom_header_set_home.dart';
 
 class SetsHorizontalListView extends StatefulWidget {
   final List<PokemonCardsSet> sets;
@@ -42,7 +42,22 @@ class _SetsHorizontalListViewState extends State<SetsHorizontalListView> {
                 scrollDirection: Axis.horizontal,
                 itemCount: widget.sets.length,
                 itemBuilder: (context, index) {
-                  return CustomCardSet(set: widget.sets[index]);
+                  if (index == widget.sets.length - 1) {
+                    return Row(
+                      children: [
+                        CustomHeaderSetHome(set: widget.sets[index]),
+                        SizedBox(
+                          width: 70,
+                          child: Text(
+                            'Más',
+                            style: theme.textTheme.titleSmall,
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ],
+                    );
+                  }
+                  return CustomHeaderSetHome(set: widget.sets[index]);
                 },
               ),
             ),

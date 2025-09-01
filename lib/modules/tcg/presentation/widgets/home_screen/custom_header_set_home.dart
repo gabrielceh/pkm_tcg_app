@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:pkm_tcg_app/modules/shared/presentation/widgets/widgets.dart';
 import 'package:pkm_tcg_app/modules/tcg/domain/domain.dart';
 
-class CustomCardSet extends StatelessWidget {
+class CustomHeaderSetHome extends StatelessWidget {
   final PokemonCardsSet set;
 
-  const CustomCardSet({super.key, required this.set});
+  const CustomHeaderSetHome({super.key, required this.set});
 
   @override
   Widget build(BuildContext context) {

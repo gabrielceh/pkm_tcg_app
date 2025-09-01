@@ -9,27 +9,42 @@ class PokemonCardMapper {
     return PokemonCard(
       id: pokemonCard.id,
       name: pokemonCard.name,
-      cardType: CardTypeMapper.map(pokemonCard.cardType),
+      idInSet: pokemonCard.localId,
+      set: CardSetDetails(
+        id: pokemonCard.set.id,
+        name: pokemonCard.set.name,
+        logo: pokemonCard.set.logo,
+        symbol: pokemonCard.set.symbol,
+        cardCount: CardSetCount(
+          official: pokemonCard.set.cardCount?.official,
+          total: pokemonCard.set.cardCount?.total,
+        ),
+      ),
+      cardType: CardTypeMapper.map(pokemonCard.category),
+      rarity: pokemonCard.rarity,
       imageHighQuality: '${pokemonCard.image}/high.png',
       imageLowQuality: '${pokemonCard.image}/low.png',
-      rarity: pokemonCard.rarity,
-      type: pokemonCard.type == null
-          ? null
-          : ColorTypeCardMap.map(pokemonCard.type!),
+      types: pokemonCard.types
+          ?.map((type) => ColorTypeCardMap.map(type))
+          .toList(),
       hp: pokemonCard.hp,
       evolvesFrom: pokemonCard.evolvesFrom,
-      attacks: pokemonCard.attacks == null
-          ? []
-          : pokemonCard.attacks!
-                .map(
-                  (attack) => CardAttack(
-                    cost: attack.cost,
-                    name: attack.name,
-                    effect: attack.effect,
-                    damage: attack.damage,
-                  ),
-                )
-                .toList(),
+      stage: pokemonCard.stage,
+      attacks: pokemonCard.attacks?.map((attack) {
+        return CardAttack(
+          cost: attack.cost,
+          name: attack.name,
+          effect: attack.effect,
+          damage: attack.damage,
+        );
+      }).toList(),
+      abilities: pokemonCard.abilities?.map((ability) {
+        return CardAbility(
+          type: ability.type,
+          name: ability.name,
+          effect: ability.effect,
+        );
+      }).toList(),
     );
   }
 }

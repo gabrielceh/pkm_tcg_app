@@ -1,5 +1,5 @@
 import 'package:pkm_tcg_app/modules/tcg/domain/entities/entities.dart';
 
 abstract class PokemonCardsDatasource {
-  Future<List<PokemonCard>> getPokemonCardById(String id);
+  Future<PokemonCard> getPokemonCardById(String id);
 }

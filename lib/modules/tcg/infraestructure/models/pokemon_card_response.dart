@@ -1,46 +1,59 @@
 class PokemonCardResponse {
   String id;
+  String localId;
+  CardSetDetailsResponse set;
   String name;
-  String cardType;
-  String? image;
+  String category;
   String? rarity;
-  String? type;
+  String? image;
+  List<String>? types;
   int? hp;
   String? evolvesFrom;
+  String? stage;
   List<CardAttackResponse>? attacks;
+  List<CardAbilityResponse>? abilities;
 
   PokemonCardResponse({
     required this.id,
     required this.name,
-    required this.cardType,
+    required this.localId,
+    required this.set,
+    required this.category,
     this.image,
     this.rarity,
-    this.type,
+    this.types,
     this.hp,
     this.evolvesFrom,
+    this.stage,
     this.attacks,
+    this.abilities,
   });
 
   factory PokemonCardResponse.fromJson(Map<String, dynamic> json) =>
       PokemonCardResponse(
         id: json["id"],
+        localId: json["localId"],
+        set: CardSetDetailsResponse.fromJson(json["set"]),
         name: json["name"],
-        cardType: json["supertype"],
-        image: json["image"],
+        category: json["category"],
+        image: json["image"] == null ? null : json['image'],
         rarity: json["rarity"],
-        type: json["type"],
+        types: json["types"] == null ? [] : List<String>.from(json["types"]),
         hp: json["hp"] == null ? 0 : json["hp"]!.toInt(),
-        evolvesFrom: json["evolvesFrom"],
+        evolvesFrom: json["evolvesFrom"] == null ? null : json['evolvesFrom'],
+        stage: json["stage"] == null ? null : json['stage'],
         attacks: json["attacks"] == null
-            ? []
+            ? null
             : List<CardAttackResponse>.from(
                 json["attacks"]!.map(
-                  (x) => CardAttackResponse(
-                    cost: List<String>.from(x["cost"]!.map((x) => x)),
-                    name: x["name"],
-                    effect: x["effect"],
-                    damage: x["damage"],
-                  ),
+                  (attack) => CardAttackResponse.fromJson(attack),
+                ),
+              ).toList(),
+        abilities: json["abilities"] == null
+            ? null
+            : List<CardAbilityResponse>.from(
+                json["abilities"]!.map(
+                  (ability) => CardAbilityResponse.fromJson(ability),
                 ),
               ).toList(),
       );
@@ -50,12 +63,75 @@ class CardAttackResponse {
   final List<String> cost;
   final String name;
   final String? effect;
-  final int damage;
+  final String? damage;
 
   CardAttackResponse({
     required this.cost,
     required this.name,
     this.effect,
-    required this.damage,
+    this.damage,
   });
+
+  factory CardAttackResponse.fromJson(Map<String, dynamic> json) =>
+      CardAttackResponse(
+        cost: List<String>.from(json["cost"]!.map((x) => x)),
+        name: json["name"],
+        effect: json["effect"] == null ? null : json['effect'],
+        damage: json["damage"] == null ? null : json['damage'].toString(),
+      );
+}
+
+class CardAbilityResponse {
+  String? type;
+  String? name;
+  String? effect;
+
+  CardAbilityResponse({this.type, this.name, this.effect});
+
+  factory CardAbilityResponse.fromJson(Map<String, dynamic> json) =>
+      CardAbilityResponse(
+        type: json["type"] == null ? null : json['type'],
+        name: json["name"] == null ? null : json['name'],
+        effect: json["effect"] == null ? null : json['effect'],
+      );
+}
+
+class CardSetDetailsResponse {
+  String id;
+  String name;
+  String? logo;
+  String? symbol;
+  CardSetCountResponse? cardCount;
+
+  CardSetDetailsResponse({
+    required this.id,
+    required this.name,
+    this.logo,
+    this.symbol,
+    this.cardCount,
+  });
+
+  factory CardSetDetailsResponse.fromJson(Map<String, dynamic> json) =>
+      CardSetDetailsResponse(
+        id: json["id"],
+        name: json["name"],
+        logo: json["logo"] == null ? null : json['logo'],
+        symbol: json["symbol"] == null ? null : json['symbol'],
+        cardCount: json["cardCount"] == null
+            ? null
+            : CardSetCountResponse.fromJson(json["cardCount"]),
+      );
+}
+
+class CardSetCountResponse {
+  String? official;
+  String? total;
+
+  CardSetCountResponse({this.official, this.total});
+
+  factory CardSetCountResponse.fromJson(Map<String, dynamic> json) =>
+      CardSetCountResponse(
+        official: json["official"] == null ? null : json['official'].toString(),
+        total: json["total"] == null ? null : json['total'].toString(),
+      );
 }

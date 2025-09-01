@@ -45,7 +45,18 @@ class CustomImageNetworkErrorHandler extends StatelessWidget {
       },
 
       errorBuilder: (context, error, stackTrace) {
-        return customErrorWidget ?? const Text('Image not found');
+        return customErrorWidget ??
+            Container(
+              width: width,
+              height: height,
+              decoration: BoxDecoration(color: Colors.grey[600]),
+              child: Center(
+                child: Text(
+                  errorMessage ?? 'Error al cargar la imagen',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            );
       },
     );
   }

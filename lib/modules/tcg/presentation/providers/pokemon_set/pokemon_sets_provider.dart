@@ -60,7 +60,7 @@ class PokemonSetsNotifier extends StateNotifier<PokemonSetsState> {
       return;
     }
 
-    oneSetNotifier.getSetById(sets[3].id);
+    oneSetNotifier.getSetById(sets.first.id);
 
     state = state.copyWith(
       isLoading: false,

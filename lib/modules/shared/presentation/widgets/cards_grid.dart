@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:pkm_tcg_app/modules/shared/presentation/widgets/widgets.dart';
 import 'package:pkm_tcg_app/modules/tcg/domain/entities/pokemon_basic_card.dart';
 
@@ -25,13 +26,16 @@ class _CardsGridState extends State<CardsGrid> {
     return SizedBox(
       width: double.infinity,
       // height: scrollController.position.maxScrollExtent,
-      height: 450,
+      // height: 450,
+      // height: double.infinity,
+      height: MediaQuery.of(context).size.height * 0.6,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8),
         child: Column(
           children: [
             Expanded(
               child: GridView.builder(
+                padding: const EdgeInsets.only(top: 0),
                 gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                   childAspectRatio: 0.71, // mas alto que ancho de los hijo
                   maxCrossAxisExtent: 200, // anncho maximo de los hijos
@@ -41,8 +45,15 @@ class _CardsGridState extends State<CardsGrid> {
                 controller: scrollController,
                 itemCount: widget.cards.length,
                 itemBuilder: (context, index) {
-                  return CustomImageNetworkErrorHandler(
-                    imageUrl: widget.cards[index].imageUrl!,
+                  final card = widget.cards[index];
+
+                  return GestureDetector(
+                    onTap: () {
+                      context.push('/card-details/${card.id}');
+                    },
+                    child: CustomImageNetworkErrorHandler(
+                      imageUrl: card.imageUrl!,
+                    ),
                   );
                 },
               ),
