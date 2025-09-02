@@ -6,6 +6,10 @@ import 'card_type_mapper.dart';
 
 class PokemonCardMapper {
   static PokemonCard pokemonCardToEntity(PokemonCardResponse pokemonCard) {
+    // String convertImgLanguage(String url) {
+    //   return url.replaceAll('/en/', '/es/');
+    // }
+
     return PokemonCard(
       id: pokemonCard.id,
       name: pokemonCard.name,
@@ -15,7 +19,7 @@ class PokemonCardMapper {
         name: pokemonCard.set.name,
         logo: pokemonCard.set.logo == null
             ? null
-            : '${pokemonCard.set.logo}.png',
+            : '${pokemonCard.set.logo!}.png',
         symbol: pokemonCard.set.symbol == null
             ? null
             : '${pokemonCard.set.symbol}.png',
@@ -38,9 +42,12 @@ class PokemonCardMapper {
       hp: pokemonCard.hp,
       evolvesFrom: pokemonCard.evolvesFrom,
       stage: pokemonCard.stage,
+      effect: pokemonCard.effect,
+      regulationMark: pokemonCard.regulationMark,
+      trainerType: pokemonCard.trainerType,
       attacks: pokemonCard.attacks?.map((attack) {
         return CardAttack(
-          cost: attack.cost,
+          cost: attack.cost.map((type) => ColorTypeCardMap.map(type)).toList(),
           name: attack.name,
           effect: attack.effect,
           damage: attack.damage,

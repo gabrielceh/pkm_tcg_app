@@ -44,7 +44,7 @@ class CardSetSection extends StatelessWidget {
             InnerShadow(
               blur: 5,
               color: Colors.black12,
-              offset: const Offset(0, 5),
+              offset: const Offset(0, 3),
               child: Container(
                 height: 25,
                 width: 150,

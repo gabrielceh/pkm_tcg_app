@@ -3,25 +3,27 @@ import 'package:pkm_tcg_app/modules/tcg/domain/entities/entities.dart';
 class ColorTypeCardMap {
   static ColorTypeCard map(String colorTypeCard) {
     switch (colorTypeCard.toLowerCase()) {
-      case "colorless":
+      case "incolora":
         return ColorTypeCard.colorless;
-      case "darkness":
+      case "oscura":
         return ColorTypeCard.darkness;
-      case "dragon":
+      case "dragón":
         return ColorTypeCard.dragon;
-      case "fighting":
+      case "hada":
         return ColorTypeCard.fighting;
-      case "fire":
+      case "lucha":
+        return ColorTypeCard.fighting;
+      case "fuego":
         return ColorTypeCard.fire;
-      case "grass":
+      case "planta":
         return ColorTypeCard.grass;
-      case "lightning":
+      case "rayo":
         return ColorTypeCard.lightning;
-      case "metal":
+      case "metálica":
         return ColorTypeCard.metal;
-      case "psychic":
+      case "psíquico":
         return ColorTypeCard.psychic;
-      case "water":
+      case "agua":
         return ColorTypeCard.water;
       default:
         return ColorTypeCard.colorless;

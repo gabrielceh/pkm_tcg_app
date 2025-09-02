@@ -15,6 +15,9 @@ class PokemonCard {
   int? hp;
   String? evolvesFrom;
   String? stage;
+  String? effect;
+  String? regulationMark;
+  String? trainerType;
   List<CardAttack>? attacks;
   List<CardAbility>? abilities;
 
@@ -31,13 +34,16 @@ class PokemonCard {
     this.hp,
     this.evolvesFrom,
     this.stage,
+    this.effect,
+    this.regulationMark,
+    this.trainerType,
     this.attacks,
     this.abilities,
   });
 }
 
 class CardAttack {
-  final List<String> cost;
+  final List<ColorTypeCard> cost;
   final String name;
   final String? effect;
   final String? damage;

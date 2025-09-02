@@ -10,11 +10,9 @@ class InnerShadow extends SingleChildRenderObjectWidget {
     this.offset = const Offset(10, 10),
     super.child,
   });
-
   final double blur;
   final Color color;
   final Offset offset;
-
   @override
   RenderObject createRenderObject(BuildContext context) {
     return RenderInnerShadow()
@@ -42,11 +40,9 @@ class RenderInnerShadow extends RenderProxyBox {
   Color color = Colors.black38;
   double dx = 10;
   double dy = 10;
-
   @override
   void paint(PaintingContext context, Offset offset) {
     if (child == null) return;
-
     final rectOuter = offset & size;
     final rectInner = Rect.fromLTWH(
       offset.dx,
@@ -54,22 +50,17 @@ class RenderInnerShadow extends RenderProxyBox {
       size.width - dx,
       size.height - dy,
     );
-
     final canvas = context.canvas..saveLayer(rectOuter, Paint());
     context.paintChild(child!, offset);
-
     final shadowPaint = Paint()
       ..blendMode = BlendMode.srcATop
       ..imageFilter = ImageFilter.blur(sigmaX: blur, sigmaY: blur)
       ..colorFilter = ColorFilter.mode(color, BlendMode.srcOut);
-
     canvas
       ..saveLayer(rectOuter, shadowPaint)
       ..saveLayer(rectInner, Paint())
       ..translate(dx, dy);
-
     context.paintChild(child!, offset);
-
     canvas
       ..restore()
       ..restore()

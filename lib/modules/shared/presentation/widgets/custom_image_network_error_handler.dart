@@ -30,16 +30,15 @@ class CustomImageNetworkErrorHandler extends StatelessWidget {
 
       loadingBuilder: (context, child, loadingProgress) {
         if (loadingProgress != null) {
-          return Center(
-            child:
-                customLoadingWidget ??
-                CircularProgressIndicator(
+          return customLoadingWidget ??
+              Center(
+                child: CircularProgressIndicator(
                   value: loadingProgress.expectedTotalBytes != null
                       ? loadingProgress.cumulativeBytesLoaded /
                             loadingProgress.expectedTotalBytes!
                       : null,
                 ),
-          );
+              );
         }
         return child;
       },

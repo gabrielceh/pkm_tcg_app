@@ -10,6 +10,9 @@ class PokemonCardResponse {
   int? hp;
   String? evolvesFrom;
   String? stage;
+  String? effect;
+  String? regulationMark;
+  String? trainerType;
   List<CardAttackResponse>? attacks;
   List<CardAbilityResponse>? abilities;
 
@@ -25,6 +28,9 @@ class PokemonCardResponse {
     this.hp,
     this.evolvesFrom,
     this.stage,
+    this.effect,
+    this.regulationMark,
+    this.trainerType,
     this.attacks,
     this.abilities,
   });
@@ -39,9 +45,14 @@ class PokemonCardResponse {
         image: json["image"] == null ? null : json['image'],
         rarity: json["rarity"],
         types: json["types"] == null ? [] : List<String>.from(json["types"]),
-        hp: json["hp"] == null ? 0 : json["hp"]!.toInt(),
+        hp: json["hp"] == null ? null : json['hp']!.toInt(),
         evolvesFrom: json["evolvesFrom"] == null ? null : json['evolvesFrom'],
         stage: json["stage"] == null ? null : json['stage'],
+        effect: json["effect"] == null ? null : json['effect'],
+        regulationMark: json["regulationMark"] == null
+            ? null
+            : json['regulationMark'],
+        trainerType: json["trainerType"] == null ? null : json['trainerType'],
         attacks: json["attacks"] == null
             ? null
             : List<CardAttackResponse>.from(
