@@ -20,26 +20,34 @@ class FullScreenLoader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Text('Cargando...'),
-          const SizedBox(height: 10),
-          const CircularProgressIndicator(strokeWidth: 2),
-          const SizedBox(height: 10),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text('Cargando...'),
+            const SizedBox(height: 10),
+            const CircularProgressIndicator(strokeWidth: 2),
+            const SizedBox(height: 10),
 
-          StreamBuilder(
-            stream: getLoadingMessages(),
-            builder: (context, snapshot) {
-              if (!snapshot.hasData) return const Text('Vamos...');
+            StreamBuilder(
+              stream: getLoadingMessages(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return Text(
+                    'Vamos...',
+                    style: Theme.of(context).textTheme.titleLarge,
+                  );
+                }
 
-              return Text(
-                snapshot.data!,
-                style: Theme.of(context).textTheme.titleLarge,
-              );
-            },
-          ),
-        ],
+                return Text(
+                  snapshot.data!,
+                  style: Theme.of(context).textTheme.titleLarge,
+                );
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

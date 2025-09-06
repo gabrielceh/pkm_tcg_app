@@ -5,7 +5,6 @@ import 'package:pkm_tcg_app/modules/shared/presentation/widgets/widgets.dart';
 import 'package:pkm_tcg_app/modules/shared/utils/utils.dart';
 import 'package:pkm_tcg_app/modules/tcg/domain/domain.dart';
 import 'package:pkm_tcg_app/modules/tcg/presentation/providers/providers.dart';
-import 'package:pkm_tcg_app/modules/tcg/presentation/widgets/home_screen/sets_horizontal_list_view.dart';
 import 'package:pkm_tcg_app/modules/tcg/presentation/widgets/widgets.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
@@ -60,7 +59,11 @@ class HomeScreenState extends ConsumerState {
         child: CustomScrollView(
           slivers: [
             SliverAppBar(
-              floating: true,
+              pinned: true, // nunca desaparece
+              expandedHeight: 70.0, // Altura inicial (se mueve hasta aquí)
+              collapsedHeight: kToolbarHeight, // Altura mínima (AppBar normal)
+              // floating: true, // desapoarce cuando hace scroll
+              // snap: true,
               flexibleSpace: FlexibleSpaceBar(
                 title: CustomAppBar(title: 'Pkm Tcg'),
                 titlePadding: const EdgeInsets.only(left: 10),

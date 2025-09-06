@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:material_symbols_icons/symbols.dart';
 import 'package:pkm_tcg_app/modules/tcg/domain/domain.dart';
 import 'package:pkm_tcg_app/modules/tcg/presentation/widgets/home_screen/custom_header_set_home.dart';
 
@@ -24,6 +26,7 @@ class _SetsHorizontalListViewState extends State<SetsHorizontalListView> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final colorScheme = Theme.of(context).colorScheme;
 
     return SizedBox(
       height: 60,
@@ -46,12 +49,17 @@ class _SetsHorizontalListViewState extends State<SetsHorizontalListView> {
                     return Row(
                       children: [
                         CustomHeaderSetHome(set: widget.sets[index]),
-                        SizedBox(
-                          width: 70,
-                          child: Text(
-                            'Más',
-                            style: theme.textTheme.titleSmall,
-                            textAlign: TextAlign.center,
+
+                        IconButton(
+                          onPressed: () {
+                            context.push('/sets');
+                          },
+                          icon: Icon(
+                            Symbols.chevron_right_rounded,
+                            size: 32,
+                            color: colorScheme.primary,
+                            weight: 600,
+                            grade: 1,
                           ),
                         ),
                       ],

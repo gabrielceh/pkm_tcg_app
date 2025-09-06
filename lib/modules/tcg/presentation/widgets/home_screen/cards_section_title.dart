@@ -6,6 +6,7 @@ class CardsSectionTitle extends StatelessWidget {
   final String? logo;
   final double? width;
   final double? height;
+  final bool? showMessage;
 
   const CardsSectionTitle({
     super.key,
@@ -13,6 +14,7 @@ class CardsSectionTitle extends StatelessWidget {
     this.logo,
     this.width,
     this.height,
+    this.showMessage = true,
   });
 
   @override
@@ -27,11 +29,12 @@ class CardsSectionTitle extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           spacing: 5,
           children: [
-            const Text(
-              "Ultimo set",
-              style: TextStyle(fontSize: 18),
-              textAlign: TextAlign.left,
-            ),
+            if (showMessage == true)
+              const Text(
+                "Ultimo set",
+                style: TextStyle(fontSize: 18),
+                textAlign: TextAlign.left,
+              ),
 
             if (logo == null)
               Expanded(

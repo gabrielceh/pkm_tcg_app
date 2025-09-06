@@ -2,6 +2,13 @@ import 'package:pkm_tcg_app/modules/tcg/domain/entities/entities.dart';
 import 'package:pkm_tcg_app/modules/tcg/infraestructure/models/pokemon_cards_set_response.dart';
 
 class PokemonSetMapper {
+  static String _urlSymbolToLogo(String urlSymbol) {
+    final url = urlSymbol
+        .replaceAll('/univ/', '/en/')
+        .replaceAll('symbol', 'logo');
+    return url;
+  }
+
   static PokemonCardsSet setToEntity(PokemonCardsSetResponse set) {
     return PokemonCardsSet(
       cardCount: SetCardCount(
@@ -34,7 +41,11 @@ class PokemonSetMapper {
               standard: set.legal!.standard,
             ),
       releaseDate: set.releaseDate,
-      logo: set.logo == null ? null : '${set.logo!}.png',
+      logo: set.logo != null
+          ? '${set.logo!}.png'
+          : set.symbol != null
+          ? '${_urlSymbolToLogo(set.symbol!)}.png'
+          : null,
       symbol: set.symbol == null ? null : '${set.symbol!}.png',
     );
   }

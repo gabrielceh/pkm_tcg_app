@@ -16,12 +16,22 @@ final appRouter = GoRouter(
           path: '/search',
           builder: (context, state) => const Text("Search"),
         ),
+
         GoRoute(
           path: '/favorites',
           builder: (context, state) => const Text("Favorites"),
         ),
+        GoRoute(
+          path: '/sets/:id',
+          builder: (context, state) {
+            final id = state.pathParameters['id']!;
+            return SetScreen(setId: id);
+          },
+        ),
       ],
     ),
+
+    GoRoute(path: '/sets', builder: (context, state) => const SetsScreen()),
 
     GoRoute(
       path: '/card-details/:id',

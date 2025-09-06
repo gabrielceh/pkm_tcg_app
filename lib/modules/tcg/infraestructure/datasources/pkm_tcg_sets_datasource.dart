@@ -17,7 +17,6 @@ class PkmTcgSetsDatasource extends PokemonCardsSetDatasource {
     try {
       final dataResponse = await _apiClient.get("/$id");
       final set = _jsonToPokemonCardsSet(dataResponse);
-      print(set);
       return set;
     } catch (e) {
       print("Error getPokemonSetById: $e");

@@ -5,7 +5,9 @@ import 'pokemon_set_repository_provider.dart';
 
 // ! Provider
 final pokemonOneSetProvider =
-    StateNotifierProvider<PokemonSetNotifier, PokemonSetState>((ref) {
+    StateNotifierProvider.autoDispose<PokemonSetNotifier, PokemonSetState>((
+      ref,
+    ) {
       final repository = ref.watch(pokemonSetRepositoryProvider);
       return PokemonSetNotifier(repository: repository);
     });
@@ -13,19 +15,13 @@ final pokemonOneSetProvider =
 // ! State
 class PokemonSetState {
   final bool isLoading;
-  final int currentPage;
   final PokemonCardsSet? set;
 
-  PokemonSetState({this.isLoading = false, this.currentPage = 1, this.set});
+  PokemonSetState({this.isLoading = false, this.set});
 
-  PokemonSetState copyWith({
-    bool? isLoading,
-    int? currentPage,
-    PokemonCardsSet? set,
-  }) {
+  PokemonSetState copyWith({bool? isLoading, PokemonCardsSet? set}) {
     return PokemonSetState(
       isLoading: isLoading ?? this.isLoading,
-      currentPage: currentPage ?? this.currentPage,
       set: set ?? this.set,
     );
   }
@@ -38,21 +34,19 @@ class PokemonSetNotifier extends StateNotifier<PokemonSetState> {
   PokemonSetNotifier({required this.repository}) : super(PokemonSetState());
 
   Future<void> getSetById(String id) async {
+    state = state.copyWith(set: null);
+
     if (state.isLoading) return;
 
-    state = state.copyWith(isLoading: true);
-    // TODO: cambiar por el id
-    final set = await repository.getPokemonSetById("sv10");
+    state = state.copyWith(isLoading: true, set: null);
+
+    final set = await repository.getPokemonSetById(id);
 
     if (set.cards.isEmpty) {
       state = state.copyWith(isLoading: false, set: null);
       return;
     }
 
-    state = state.copyWith(
-      isLoading: false,
-      currentPage: state.currentPage + 1,
-      set: set,
-    );
+    state = state.copyWith(isLoading: false, set: set);
   }
 }

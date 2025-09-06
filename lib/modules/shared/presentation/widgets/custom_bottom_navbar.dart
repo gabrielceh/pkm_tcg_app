@@ -39,26 +39,37 @@ class CustomBottomNavbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BottomNavigationBar(
+    final colorScheme = Theme.of(context).colorScheme;
+    return NavigationBar(
       elevation: 0,
-      currentIndex: getCurrentIndex(context),
+      selectedIndex: getCurrentIndex(context),
+      indicatorColor: colorScheme.primary,
       // value es el indice del item que se ha pulsado
-      onTap: (value) => _onItemTapped(context, value),
-      items: const [
+      onDestinationSelected: (value) => _onItemTapped(context, value),
+      destinations: [
         // necesita mas de un item
-        BottomNavigationBarItem(
-          activeIcon: Icon(Icons.catching_pokemon),
+        NavigationDestination(
+          selectedIcon: Icon(
+            Icons.catching_pokemon,
+            color: colorScheme.secondaryContainer,
+          ),
           icon: Icon(Icons.catching_pokemon_outlined),
           label: 'Home',
         ),
-        BottomNavigationBarItem(
-          activeIcon: Icon(Icons.search),
+        NavigationDestination(
+          selectedIcon: Icon(
+            Icons.search,
+            color: colorScheme.secondaryContainer,
+          ),
           icon: Icon(Icons.search_outlined),
           label: 'Buscar',
         ),
 
-        BottomNavigationBarItem(
-          activeIcon: Icon(Icons.favorite),
+        NavigationDestination(
+          selectedIcon: Icon(
+            Icons.favorite,
+            color: colorScheme.secondaryContainer,
+          ),
           icon: Icon(Icons.favorite_outline),
           label: 'Favoritos',
         ),

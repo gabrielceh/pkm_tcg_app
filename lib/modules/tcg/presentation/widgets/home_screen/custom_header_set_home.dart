@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:pkm_tcg_app/modules/shared/presentation/widgets/widgets.dart';
 import 'package:pkm_tcg_app/modules/tcg/domain/domain.dart';
 
@@ -11,7 +12,7 @@ class CustomHeaderSetHome extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        print('${set.id} : ${set.name}');
+        context.push('/sets/${set.id}');
       },
       child: Container(
         width: 100,

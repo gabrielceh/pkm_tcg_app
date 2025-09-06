@@ -24,8 +24,6 @@ class PokemonCardNotifier extends StateNotifier<Map<String, PokemonCard>> {
 
     final card = await getCard(id);
 
-    print(card);
-
     if (card.id.isEmpty) {
       return;
     }

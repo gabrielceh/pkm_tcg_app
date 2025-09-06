@@ -1,0 +1,35 @@
+import 'package:flutter/material.dart';
+import 'package:pkm_tcg_app/modules/shared/presentation/widgets/widgets.dart';
+
+class SetScreenTitle extends StatelessWidget {
+  final String title;
+  final String? logo;
+  final double? width;
+  final double? height;
+
+  const SetScreenTitle({
+    super.key,
+    required this.title,
+    this.logo,
+    this.width,
+    this.height,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return logo == null
+        ? Center(
+            child: Text(
+              title,
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+            ),
+          )
+        : CustomImageNetworkErrorHandler(
+            imageUrl: logo!,
+            width: width,
+            height: height,
+            fit: BoxFit.contain,
+          );
+  }
+}

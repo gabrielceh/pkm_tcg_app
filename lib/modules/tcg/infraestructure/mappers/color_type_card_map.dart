@@ -10,10 +10,12 @@ class ColorTypeCardMap {
       case "dragón":
         return ColorTypeCard.dragon;
       case "hada":
-        return ColorTypeCard.fighting;
+        return ColorTypeCard.fairy;
       case "lucha":
         return ColorTypeCard.fighting;
       case "fuego":
+        return ColorTypeCard.fire;
+      case "guego":
         return ColorTypeCard.fire;
       case "planta":
         return ColorTypeCard.grass;

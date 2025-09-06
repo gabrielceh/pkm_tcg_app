@@ -5,8 +5,9 @@ import 'package:pkm_tcg_app/modules/tcg/domain/entities/pokemon_basic_card.dart'
 
 class CardsGrid extends StatefulWidget {
   final List<PokemonBasicCard> cards;
+  final double? height;
 
-  const CardsGrid({super.key, required this.cards});
+  const CardsGrid({super.key, required this.cards, this.height});
 
   @override
   State<CardsGrid> createState() => _CardsGridState();
@@ -28,7 +29,7 @@ class _CardsGridState extends State<CardsGrid> {
       // height: scrollController.position.maxScrollExtent,
       // height: 450,
       // height: double.infinity,
-      height: MediaQuery.of(context).size.height * 0.6,
+      height: widget.height ?? MediaQuery.of(context).size.height * 0.6,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8),
         child: Column(
