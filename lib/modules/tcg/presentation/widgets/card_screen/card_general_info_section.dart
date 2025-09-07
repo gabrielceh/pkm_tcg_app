@@ -17,7 +17,7 @@ class CardGeneralInfoSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
 
         children: [
-          Center(child: CardSectionTitle(title: "Información General")),
+          Center(child: CardSectionTitle(title: "General Info")),
 
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -32,13 +32,13 @@ class CardGeneralInfoSection extends StatelessWidget {
 
                 if (card.trainerType != null)
                   _ItemDetail(
-                    label: "Tipo de Entrenador",
+                    label: "Trainer Type",
                     value: _CustomTextValue(value: card.trainerType!),
                   ),
 
                 if (card.types != null && card.types!.isNotEmpty)
                   _ItemDetail(
-                    label: "Tipo",
+                    label: "Type",
                     value: Image.asset(
                       FromTypePokemonToTypeAsset.toAsset(card.types!.first),
                       width: 15,
@@ -48,13 +48,13 @@ class CardGeneralInfoSection extends StatelessWidget {
 
                 if (card.hp != null)
                   _ItemDetail(
-                    label: "PS",
+                    label: "HP",
                     value: _CustomTextValue(value: card.hp!.toString()),
                   ),
 
                 if (card.regulationMark != null)
                   _ItemDetail(
-                    label: "Regulación",
+                    label: "Regulation Mark",
                     value: _CustomTextValue(value: card.regulationMark!),
                   ),
               ],

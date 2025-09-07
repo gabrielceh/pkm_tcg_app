@@ -4,9 +4,9 @@ import 'package:pkm_tcg_app/modules/shared/presentation/widgets/custom_image_net
 import 'package:pkm_tcg_app/modules/shared/utils/utils.dart';
 
 class CardShowImage extends StatelessWidget {
-  final String imageUrl;
+  final String? imageUrl;
 
-  const CardShowImage({super.key, required this.imageUrl});
+  const CardShowImage({super.key, this.imageUrl});
 
   @override
   Widget build(BuildContext context) {
@@ -14,25 +14,6 @@ class CardShowImage extends StatelessWidget {
 
     return IconButton(
       onPressed: () {
-        // showDialog(
-        //   context: context,
-        //   builder: (context) {
-        //     return Dialog(
-        //       insetPadding: const EdgeInsets.all(20),
-        //       shape: RoundedRectangleBorder(
-        //         borderRadius: BorderRadius.circular(12),
-        //       ),
-        //       child: SizedBox(
-        //         width: 400,
-        //         height: 450,
-        //         child: CustomImageNetworkErrorHandler(
-        //           imageUrl: imageUrl,
-        //           fit: BoxFit.cover,
-        //         ),
-        //       ),
-        //     );
-        //   },
-        // );
         _customShowGeneralDialog(context, imageUrl);
       },
       icon: const Icon(Icons.zoom_out_map_rounded),
@@ -43,7 +24,7 @@ class CardShowImage extends StatelessWidget {
 
 Future<Object?> _customShowGeneralDialog(
   BuildContext context,
-  String imageUrl,
+  String? imageUrl,
 ) {
   final imgAspectRatio = resizeWithAspectRatio(
     originalWidth: ImageCardSizes.high().width,
@@ -69,7 +50,7 @@ Future<Object?> _customShowGeneralDialog(
               borderRadius: BorderRadius.circular(20),
             ),
             child: CustomImageNetworkErrorHandler(
-              imageUrl: imageUrl,
+              imageUrl: imageUrl ?? '',
               width: imgAspectRatio["width"]!,
               height: imgAspectRatio["height"]!,
               // fit: BoxFit.cover,

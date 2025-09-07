@@ -16,7 +16,7 @@ class CardEffectSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
 
         children: [
-          Center(child: CardSectionTitle(title: "Efecto")),
+          Center(child: CardSectionTitle(title: "Effect")),
           Text(
             effect,
             style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500),

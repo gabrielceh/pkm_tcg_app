@@ -51,7 +51,7 @@ class CustomImageNetworkErrorHandler extends StatelessWidget {
               decoration: BoxDecoration(color: Colors.grey[600]),
               child: Center(
                 child: Text(
-                  errorMessage ?? 'Error al cargar la imagen',
+                  errorMessage ?? 'Imagen no disponible',
                   style: TextStyle(color: Colors.white),
                 ),
               ),

@@ -31,7 +31,7 @@ class CardsSectionTitle extends StatelessWidget {
           children: [
             if (showMessage == true)
               const Text(
-                "Ultimo set",
+                "Last set",
                 style: TextStyle(fontSize: 18),
                 textAlign: TextAlign.left,
               ),

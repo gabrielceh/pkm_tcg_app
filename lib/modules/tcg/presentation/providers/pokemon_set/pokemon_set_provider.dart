@@ -15,14 +15,17 @@ final pokemonOneSetProvider =
 // ! State
 class PokemonSetState {
   final bool isLoading;
-  final PokemonCardsSet? set;
+  final Map<String, PokemonCardsSet?> sets;
 
-  PokemonSetState({this.isLoading = false, this.set});
+  PokemonSetState({this.isLoading = false, this.sets = const {}});
 
-  PokemonSetState copyWith({bool? isLoading, PokemonCardsSet? set}) {
+  PokemonSetState copyWith({
+    bool? isLoading,
+    Map<String, PokemonCardsSet?>? sets,
+  }) {
     return PokemonSetState(
       isLoading: isLoading ?? this.isLoading,
-      set: set ?? this.set,
+      sets: sets ?? this.sets,
     );
   }
 }
@@ -34,19 +37,19 @@ class PokemonSetNotifier extends StateNotifier<PokemonSetState> {
   PokemonSetNotifier({required this.repository}) : super(PokemonSetState());
 
   Future<void> getSetById(String id) async {
-    state = state.copyWith(set: null);
+    if (state.sets[id] != null) return;
 
     if (state.isLoading) return;
 
-    state = state.copyWith(isLoading: true, set: null);
+    state = state.copyWith(isLoading: true);
 
     final set = await repository.getPokemonSetById(id);
 
-    if (set.cards.isEmpty) {
-      state = state.copyWith(isLoading: false, set: null);
+    if (set.id.isEmpty) {
+      state = state.copyWith(isLoading: false, sets: {...state.sets, id: null});
       return;
     }
 
-    state = state.copyWith(isLoading: false, set: set);
+    state = state.copyWith(isLoading: false, sets: {...state.sets, id: set});
   }
 }

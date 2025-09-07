@@ -13,32 +13,32 @@ class PkmTcgCardsDatasource extends PokemonCardsDatasource {
 
   @override
   Future<PokemonCard> getPokemonCardById(String id) async {
-    final dataResponse = await _apiClient.get('/$id');
-    final card = _jsonToPokemonCard(dataResponse);
-    print(card);
-    return card;
-    // try {
-    //   final dataResponse = await _apiClient.get('/$id');
-    //   final card = _jsonToPokemonCard(dataResponse);
-    //   print(card);
+    // final dataResponse = await _apiClient.get('/$id');
+    // final card = _jsonToPokemonCard(dataResponse);
+    // print(card);
+    // return card;
+    try {
+      final dataResponse = await _apiClient.get('/$id');
+      final card = _jsonToPokemonCard(dataResponse);
+      print(card);
 
-    //   return card;
-    // } catch (e) {
-    //   print("Error getPokemonCardById: $e");
-    //   return PokemonCard(
-    //     id: "",
-    //     name: "",
-    //     idInSet: "",
-    //     set: CardSetDetails(id: "", name: "", logo: "", symbol: ""),
-    //     cardType: CategoryCard.pokemon,
-    //     rarity: "",
-    //     imageHighQuality: "",
-    //     imageLowQuality: "",
-    //     types: [],
-    //     hp: 0,
-    //     evolvesFrom: "",
-    //     attacks: [],
-    //   );
-    // }
+      return card;
+    } catch (e) {
+      print("Error id $id getPokemonCardById: $e");
+      return PokemonCard(
+        id: "",
+        name: "",
+        idInSet: "",
+        set: CardSetDetails(id: "", name: "", logo: "", symbol: ""),
+        cardType: CategoryCard.pokemon,
+        rarity: "",
+        imageHighQuality: "",
+        imageLowQuality: "",
+        types: [],
+        hp: 0,
+        evolvesFrom: "",
+        attacks: [],
+      );
+    }
   }
 }

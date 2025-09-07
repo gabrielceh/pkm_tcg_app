@@ -50,6 +50,7 @@ class HomeScreenState extends ConsumerState {
     final initialLoading = ref.watch(initialLoadingProvider);
 
     final setsState = ref.watch(pokemonSetsProvider);
+
     final oneSetState = ref.watch(pokemonOneSetProvider);
 
     return Scaffold(
@@ -80,15 +81,20 @@ class HomeScreenState extends ConsumerState {
                   children: [
                     SetsHorizontalListView(sets: setsState.sets),
 
-                    if (oneSetState.set == null) const SizedBox(),
+                    if (oneSetState.sets[setsState.sets[0].id] == null)
+                      const SizedBox(),
 
-                    if (oneSetState.set != null)
+                    if (oneSetState.sets[setsState.sets[0].id] != null)
                       CardsSectionTitle(
-                        title: oneSetState.set!.name,
-                        logo: oneSetState.set!.logo,
+                        title: oneSetState.sets[setsState.sets[0].id]!.name,
+                        logo: oneSetState.sets[setsState.sets[0].id]!.logo,
                         width: 200,
                       ),
-                    CardsGrid(cards: getBasicCards(oneSetState.set!.cards)),
+                    CardsGrid(
+                      cards: getBasicCards(
+                        oneSetState.sets[setsState.sets[0].id]!.cards,
+                      ),
+                    ),
                   ],
                 );
               }),

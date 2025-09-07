@@ -17,7 +17,7 @@ class CardAttackSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
 
         children: [
-          Center(child: CardSectionTitle(title: "Ataques")),
+          Center(child: CardSectionTitle(title: "Attaks")),
 
           ...attacks.map((attack) => CardAttackItem(attack: attack)),
         ],

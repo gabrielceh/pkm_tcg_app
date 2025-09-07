@@ -6,10 +6,6 @@ import 'card_type_mapper.dart';
 
 class PokemonCardMapper {
   static PokemonCard pokemonCardToEntity(PokemonCardResponse pokemonCard) {
-    // String convertImgLanguage(String url) {
-    //   return url.replaceAll('/en/', '/es/');
-    // }
-
     return PokemonCard(
       id: pokemonCard.id,
       name: pokemonCard.name,
@@ -30,10 +26,12 @@ class PokemonCardMapper {
       ),
       cardType: CardTypeMapper.map(pokemonCard.category),
       rarity: pokemonCard.rarity,
-      imageHighQuality: pokemonCard.image == null
+      imageHighQuality:
+          pokemonCard.image == null || !pokemonCard.image!.startsWith('https')
           ? null
           : '${pokemonCard.image}/high.png',
-      imageLowQuality: pokemonCard.image == null
+      imageLowQuality:
+          pokemonCard.image == null || !pokemonCard.image!.startsWith('https')
           ? null
           : '${pokemonCard.image}/low.png',
       types: pokemonCard.types

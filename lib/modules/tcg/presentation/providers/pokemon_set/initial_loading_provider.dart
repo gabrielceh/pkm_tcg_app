@@ -4,7 +4,7 @@ import 'package:pkm_tcg_app/modules/tcg/presentation/providers/pokemon_set/pokem
 
 final initialLoadingProvider = Provider<bool>((ref) {
   final step1 = ref.watch(pokemonSetsProvider).sets.isEmpty;
-  final step2 = ref.watch(pokemonOneSetProvider).set == null;
+  final step2 = ref.watch(pokemonOneSetProvider).isLoading;
 
   if (step1 || step2) return true;
 

@@ -14,8 +14,8 @@ class PkmTcgSetsDatasource extends PokemonCardsSetDatasource {
 
   @override
   Future<PokemonCardsSet> getPokemonSetById(String id) async {
+    final dataResponse = await _apiClient.get("/$id");
     try {
-      final dataResponse = await _apiClient.get("/$id");
       final set = _jsonToPokemonCardsSet(dataResponse);
       return set;
     } catch (e) {

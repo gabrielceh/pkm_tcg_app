@@ -34,7 +34,7 @@ class CardDetailsScreenState extends ConsumerState<CardDetailsScreen> {
     }
 
     return Scaffold(
-      appBar: AppBar(title: Text('Detalles')),
+      appBar: AppBar(title: Text('Details')),
       body: Stack(
         children: [
           Column(
@@ -52,7 +52,7 @@ class CardDetailsScreenState extends ConsumerState<CardDetailsScreen> {
                 ),
               ),
 
-              Center(child: CardShowImage(imageUrl: card.imageHighQuality!)),
+              Center(child: CardShowImage(imageUrl: card.imageHighQuality)),
             ],
           ),
           CardDraggableScroll(card: card),

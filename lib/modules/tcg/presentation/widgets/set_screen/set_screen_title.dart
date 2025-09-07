@@ -18,12 +18,12 @@ class SetScreenTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return logo == null
-        ? Center(
-            child: Text(
-              title,
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-            ),
+        ? Text(
+            title,
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            overflow: TextOverflow.ellipsis,
+            maxLines: 1,
           )
         : CustomImageNetworkErrorHandler(
             imageUrl: logo!,

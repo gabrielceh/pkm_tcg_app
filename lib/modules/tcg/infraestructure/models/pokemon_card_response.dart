@@ -37,11 +37,11 @@ class PokemonCardResponse {
 
   factory PokemonCardResponse.fromJson(Map<String, dynamic> json) =>
       PokemonCardResponse(
-        id: json["id"],
-        localId: json["localId"],
+        id: json["id"] ?? '',
+        localId: json["localId"] ?? '',
         set: CardSetDetailsResponse.fromJson(json["set"]),
-        name: json["name"],
-        category: json["category"],
+        name: json["name"] ?? '',
+        category: json["category"] ?? '',
         image: json["image"] == null ? null : json['image'],
         rarity: json["rarity"],
         types: json["types"] == null ? [] : List<String>.from(json["types"]),
@@ -85,8 +85,10 @@ class CardAttackResponse {
 
   factory CardAttackResponse.fromJson(Map<String, dynamic> json) =>
       CardAttackResponse(
-        cost: List<String>.from(json["cost"]!.map((x) => x)),
-        name: json["name"],
+        cost: json["cost"] == null
+            ? []
+            : List<String>.from(json["cost"]!.map((x) => x)),
+        name: json["name"] ?? '-',
         effect: json["effect"] == null ? null : json['effect'],
         damage: json["damage"] == null ? null : json['damage'].toString(),
       );

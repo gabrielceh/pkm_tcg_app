@@ -28,10 +28,9 @@ final appRouter = GoRouter(
             return SetScreen(setId: id);
           },
         ),
+        GoRoute(path: '/sets', builder: (context, state) => const SetsScreen()),
       ],
     ),
-
-    GoRoute(path: '/sets', builder: (context, state) => const SetsScreen()),
 
     GoRoute(
       path: '/card-details/:id',

@@ -17,7 +17,7 @@ class CardAbilities extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
 
         children: [
-          Center(child: CardSectionTitle(title: "Habilidades")),
+          Center(child: CardSectionTitle(title: "Abilities")),
 
           ...abilities.map(
             (attack) => Column(

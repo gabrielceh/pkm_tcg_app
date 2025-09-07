@@ -62,7 +62,7 @@ class CustomBottomNavbar extends StatelessWidget {
             color: colorScheme.secondaryContainer,
           ),
           icon: Icon(Icons.search_outlined),
-          label: 'Buscar',
+          label: 'Search',
         ),
 
         NavigationDestination(
@@ -71,7 +71,7 @@ class CustomBottomNavbar extends StatelessWidget {
             color: colorScheme.secondaryContainer,
           ),
           icon: Icon(Icons.favorite_outline),
-          label: 'Favoritos',
+          label: 'Favorites',
         ),
       ],
     );

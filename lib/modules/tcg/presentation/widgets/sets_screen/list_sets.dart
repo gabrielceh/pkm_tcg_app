@@ -38,20 +38,18 @@ class _ListSetsState extends State<ListSets> {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: GridView.builder(
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          childAspectRatio: 1.4,
-          crossAxisSpacing: 8,
-          mainAxisSpacing: 8,
-        ),
-        controller: scrollController,
-        itemCount: widget.sets.length,
-        itemBuilder: (context, index) {
-          return _SetCardImage(set: widget.sets[index], width: 200, height: 75);
-        },
+    return GridView.builder(
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        childAspectRatio: 1.4,
+        crossAxisSpacing: 8,
+        mainAxisSpacing: 8,
       ),
+      controller: scrollController,
+      itemCount: widget.sets.length,
+      itemBuilder: (context, index) {
+        return _SetCardImage(set: widget.sets[index], width: 200, height: 75);
+      },
     );
   }
 }

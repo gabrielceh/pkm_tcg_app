@@ -40,19 +40,22 @@ class SetScreenState extends ConsumerState<SetScreen> {
   @override
   Widget build(BuildContext context) {
     final setData = ref.watch(pokemonOneSetProvider);
-    final height = MediaQuery.of(context).size.height * 0.6;
+    final height = MediaQuery.of(context).size.height * 0.7;
 
     if (setData.isLoading) {
       return Scaffold(body: const FullScreenLoader());
     }
 
-    if (setData.set == null && !setData.isLoading) {
-      return Scaffold(body: const Text('No se encontro el set'));
+    if (setData.sets[widget.setId] == null && !setData.isLoading) {
+      return Scaffold(
+        appBar: AppBar(title: Text('Set Not Found')),
+        body: Center(child: const Text('Set Not Found')),
+      );
     }
 
     return Scaffold(
       body: Visibility(
-        visible: !setData.isLoading && setData.set != null,
+        visible: !setData.isLoading && setData.sets[widget.setId] != null,
         replacement: const FullScreenLoader(),
         child: CustomScrollView(
           slivers: [
@@ -65,8 +68,8 @@ class SetScreenState extends ConsumerState<SetScreen> {
               flexibleSpace: FlexibleSpaceBar(
                 expandedTitleScale: 1.2,
                 title: SetScreenTitle(
-                  title: setData.set!.name,
-                  logo: setData.set!.logo,
+                  title: setData.sets[widget.setId]!.name,
+                  logo: setData.sets[widget.setId]!.logo,
                   width: 120,
                   height: 50,
                   // height: 120,
@@ -92,14 +95,17 @@ class SetScreenState extends ConsumerState<SetScreen> {
                             ItemKeyValue(
                               label: 'Serie',
                               value: _CustomTextValue(
-                                value: setData.set!.serie?.name ?? 'Sin Serie',
+                                value:
+                                    setData.sets[widget.setId]!.serie?.name ??
+                                    'Sin Serie',
                               ),
                             ),
                             ItemKeyValue(
-                              label: 'Lanzamiento',
+                              label: 'Release Date',
                               value: _CustomTextValue(
                                 value: _dateFormat(
-                                  setData.set!.releaseDate!.toString(),
+                                  setData.sets[widget.setId]!.releaseDate!
+                                      .toString(),
                                 ),
                               ),
                             ),
@@ -109,7 +115,7 @@ class SetScreenState extends ConsumerState<SetScreen> {
                     ),
 
                     CardsGrid(
-                      cards: getBasicCards(setData.set!.cards),
+                      cards: getBasicCards(setData.sets[widget.setId]!.cards),
                       height: height,
                     ),
                   ],

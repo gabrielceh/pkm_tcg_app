@@ -6,8 +6,8 @@ class PokemonCardsSetResponse {
   final SetSerieResponse? serie;
   final SetLegalResponse? legal;
   final String? logo;
-  final DateTime? releaseDate;
   final String? symbol;
+  final DateTime? releaseDate;
 
   PokemonCardsSetResponse({
     required this.cardCount,
@@ -23,16 +23,18 @@ class PokemonCardsSetResponse {
 
   factory PokemonCardsSetResponse.fromJson(Map<String, dynamic> json) =>
       PokemonCardsSetResponse(
-        id: json["id"],
-        name: json["name"],
-        cardCount: SetCardCountResponse.fromJson(json["cardCount"]),
+        id: json["id"] ?? '',
+        name: json["name"] ?? '',
+        cardCount: json["cardCount"] == null
+            ? SetCardCountResponse(official: 0, total: 0)
+            : SetCardCountResponse.fromJson(json["cardCount"]),
         cards: json["cards"] == null
             ? []
             : List<SetCardResponse>.from(
                 json["cards"].map((x) => SetCardResponse.fromJson(x)),
               ),
-        logo: json["logo"],
-        symbol: json["symbol"],
+        logo: json["logo"] == null ? null : json['logo'],
+        symbol: json["symbol"] == null ? null : json['symbol'],
         legal: json["legal"] == null
             ? null
             : SetLegalResponse.fromJson(json["legal"]),
@@ -89,7 +91,7 @@ class SetCardResponse {
   factory SetCardResponse.fromJson(Map<String, dynamic> json) =>
       SetCardResponse(
         id: json["id"],
-        image: json["image"],
+        image: json['image'] == null ? "" : json["image"],
         localId: json["localId"],
         name: json["name"],
       );
